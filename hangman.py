@@ -2,6 +2,7 @@
 # User guesses a word, letter by letter, until they have guessed the word or run out of guesses.
 # Word chosen from file, user is asked for their first guess, shows correct letter.
 import random
+import os
 
 
 def print_logo():
@@ -46,7 +47,8 @@ def check_guess(chosen_word, wrong_guesses, display):
                     is_containing = True
                     if "_" not in display:
                         solved = True
-                        print("\nCongratulations! You've guessed the word.")
+                        print(
+                            f"\nCongratulations! You've guessed the word in {wrong_guesses} wrong guesses.")
                         break
             if is_containing == False:
                 wrong_guesses += 1
@@ -57,7 +59,8 @@ def check_guess(chosen_word, wrong_guesses, display):
 
 
 def get_word_list():
-    with open("words.txt", "r") as file:
+    file_path = os.path.join(os.path.dirname(__file__), "words.txt")
+    with open(file_path, "r") as file:
         words = file.read().splitlines()
     return words
 
